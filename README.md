@@ -1,4 +1,4 @@
-# AWS SAA-C03 + Cloud SecOps Labs (Portfolio)
+# Cloud SecOps Labs (Portfolio)
 
 Hands-on labs and incident-style writeups focused on **AWS Solutions Architect Associate (SAA-C03)** fundamentals and **Cloud SecOps** skills (IAM, VPC, CloudTrail, CloudWatch, S3 security).  
 ---
