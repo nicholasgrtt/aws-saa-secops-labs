@@ -1,0 +1,113 @@
+# Lab 01 — Local Subnet vs Gateway Routing
+
+## Objective
+Understand how a host decides whether to send traffic directly to another device in the same subnet or forward it to the default gateway.
+
+---
+
+## Environment
+
+Machine: macOS  
+Tools used:
+- ping
+- traceroute
+- arp
+- netstat
+
+## Step 1 — Identify Local Network
+
+Command used:
+ifconfig
+
+Result:
+
+The machine has an IP address in the private range:
+192.168.x.x
+
+This indicates the device is part of a local network (LAN).
+
+---
+
+## Step 2 — Identify Default Gateway
+
+Command used:
+netstat -rn | grep default
+
+Example result:
+default 192.168.x.1
+
+This router acts as the gateway between the local network and external networks.
+
+---
+
+## Step 3 — Test Communication Within the Same Network
+
+Command:
+ping 192.168.x.1
+
+Observation:
+
+The device responded successfully.
+
+Conclusion:
+
+Devices within the same subnet communicate directly without using the gateway.
+
+The system resolves the MAC address using ARP and sends packets directly to the destination.
+
+---
+
+## Step 4 — Test Communication Outside the Network
+
+Command:
+ping 8.8.8.8
+
+Observation:
+
+Traffic successfully reached the destination.
+
+Conclusion:
+
+Since the destination is outside the local subnet, the host forwards the packet to the default gateway.
+
+The gateway router then determines the next hop toward the destination.
+
+---
+
+## Step 5 — Trace the Route
+
+Command:
+traceroute 8.8.8.8
+
+ output (simplified):
+1 192.168.x.1
+2 ISP router
+3 ...
+4 Google network
+
+Conclusion:
+
+Packets leave the local network through the gateway and traverse multiple routers across the internet until reaching the destination.
+
+Some hops may appear as `* * *`, which indicates routers that do not respond to traceroute requests.
+
+---
+
+## Key Networking Principle
+
+A host determines whether traffic is local or remote using its subnet mask.
+Same subnet → direct communication
+Different subnet → send to gateway
+
+---
+
+## Concepts Learned
+
+- Local Area Network (LAN)
+- Subnet identification
+- Default gateway function
+- ARP resolution
+- Basic internet routing
+- Network troubleshooting tools
+
+---
